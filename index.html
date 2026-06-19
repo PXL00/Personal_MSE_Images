@@ -1,6 +1,13 @@
 <div id="g"></div>
+
 <script>
 fetch("https://api.github.com/repos/pxl00/Personal_MSE_Images/contents")
-.then(r=>r.json())
-.then(f=>g.innerHTML=f.filter(x=>x.name.endsWith(".png")).map(x=>`<img src="${x.download_url}" width="200">`).join(""));
+  .then(r => r.json())
+  .then(files => {
+    const g = document.getElementById("g");
+    files.forEach(f => {
+      if (f.download_url)
+        g.innerHTML += `<img src="${f.download_url}" width="200">`;
+    });
+  });
 </script>
