@@ -1,37 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Images</title>
-    <style>
-        img {
-            width: 200px;
-            margin: 10px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Images</h1>
-    <div id="gallery"></div>
-
-    <script>
-        const owner = "pxl00";
-        const repo = "Personal_MSE_Images";
-
-        fetch(`https://api.github.com/repos/${owner}/${repo}/contents`)
-            .then(response => response.json())
-            .then(files => {
-                const gallery = document.getElementById("gallery");
-
-                files.forEach(file => {
-                    if (/\.(png|jpg|jpeg|gif|webp)$/i.test(file.name)) {
-                        const img = document.createElement("img");
-                        img.src = file.download_url;
-                        img.alt = file.name;
-                        gallery.appendChild(img);
-                    }
-                });
-            });
-    </script>
-</body>
-</html>
+<div id="g"></div>
+<script>
+fetch("https://api.github.com/repos/pxl00/Personal_MSE_Images/contents")
+.then(r=>r.json())
+.then(f=>g.innerHTML=f.filter(x=>x.name.endsWith(".png")).map(x=>`<img src="${x.download_url}" width="200">`).join(""));
+</script>
